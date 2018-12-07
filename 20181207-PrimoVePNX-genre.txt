@@ -1,0 +1,80 @@
+rule "Primo VE - Genre 600"
+	when
+        MARC is "600"."v" AND
+        MARC."600".ind"2" equals "0"
+	then
+        create pnx."display"."genre" with MARC."600"."v"
+end
+
+rule "Primo VE - Genre 610"
+	when
+        MARC is "610"."v" AND
+        MARC."610".ind"2" equals "0"
+	then
+        create pnx."display"."genre" with MARC."610"."v"
+end
+
+rule "Primo VE - Genre 611"
+	when
+        MARC is "611"."v" AND
+        MARC."611".ind"2" equals "0"
+	then
+        create pnx."display"."genre" with MARC."611"."v"
+end
+
+rule "Primo VE - Genre 630"
+	when
+        MARC is "630"."v" AND
+        MARC."630".ind"2" equals "0"
+	then
+	set TEMP"1" to MARC."630"."v"
+        kormarc remove nonfiling brackets MARC."630" sourcetag "630" from TEMP"1"
+        create pnx."display"."genre" with TEMP"1"
+end
+
+rule "Primo VE - Genre 650"
+	when
+        MARC is "650"."v" AND
+        MARC."650".ind"2" equals "0"
+	then
+        create pnx."display"."genre" with MARC."650"."v"
+end
+
+rule "Primo VE - Genre 651"
+	when
+        MARC is "651"."v" AND
+        MARC."651".ind"2" equals "0"
+	then
+        create pnx."display"."genre" with MARC."651"."v"
+end
+
+rule "Primo VE - Genre 655"
+	when
+		MARC is "655"."a" AND NOT
+		MARC."655".ind"2" equals "1" AND NOT
+		MARC."655".ind"2" equals "2" AND NOT
+		MARC."655".ind"2" equals "3" AND NOT
+		MARC."655".ind"2" equals "4" AND NOT
+		MARC."655".ind"2" equals "5" AND NOT
+		MARC."655".ind"2" equals "6" AND NOT
+		MARC."655".ind"2" equals "8" AND NOT
+		MARC."655"."2" match "local" AND NOT
+		MARC."655"."2" match "gnd" AND NOT
+		MARC."655"."2" match "nbdbgf" AND NOT
+		MARC."655"."2" match "rvmgf" AND NOT
+		MARC."655"."2" match "saogf" AND NOT
+		MARC."655"."2" match "sgp" AND NOT
+		MARC."655"."2" match "slm" AND NOT
+		MARC."655"."2" match "tgfbne" AND NOT
+		MARC."655"."2" match "proysen"
+	then
+        create pnx."display"."genre" with MARC."655"."a"
+end
+
+rule "Primo VE - Genre 880-655"
+	when
+        MARC is "880"."a" AND
+        MARC."880"."6" match "655-.*"
+	then
+        create pnx."display"."genre" with MARC."880"."a"
+end
